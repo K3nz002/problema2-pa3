@@ -2,15 +2,15 @@ import sys
 import threading
 import time
 
-from arvore import Arvore
-from r1_registrar_chegada import registrar_chegada
-from r2_buscar_chegada import buscar_chegada
-from r3_proximo import proximo
-from r4_proximo_da_linha import proximo_da_linha
-from r5_entre import entre
-from r6_remover_chegada import remover_chegada
-from r7_altura import altura
-from r8_espera_semanal import espera_semanal
+from busca_binaria import Arvore
+from registrar_chegada import registrar_chegada
+from buscar_chegada import buscar_chegada
+from proximo import proximo
+from proximo_da_linha import proximo_da_linha
+from entre import entre
+from remover_chegada import remover_chegada
+from altura import altura
+from espera_semanal import espera_semanal
 
 
 def ler_operacoes(caminho):

@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-import buscar_chegada
+from buscar_chegada
 
 def espera_semanal(linha, data, horario, k):
     data_final = datetime.strptime(data, '%Y-%m-%d')

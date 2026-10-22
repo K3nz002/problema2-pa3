@@ -1,4 +1,5 @@
 from chave import para_segundos, chave_para_chegada
+from busca_binaria import Arvore, No
 
 
 def entre(arvore, data1, horario1, data2, horario2):
