@@ -1,7 +1,5 @@
-from registrar_chegada import Arvore
+from busca_binaria import Arvore, No
 
-
-# R3: PROX data hora
 def proximo(arvore, data, hora):
     atual = arvore.raiz
     melhor = None

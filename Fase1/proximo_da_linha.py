@@ -1,4 +1,4 @@
-from registrar_chegada import Arvore
+from busca_binaria import Arvore, No
 
 
 # R4: PROXL data hora linha

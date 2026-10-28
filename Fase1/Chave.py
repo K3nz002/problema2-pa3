@@ -7,7 +7,15 @@ tupla (segundos, linha):
 Duas chegadas só são iguais se tiverem o mesmo instante e a mesma linha.
 """
 
-from datetime import date  
+from datetime import date, timedelta
+
+def para_segundos(data_str, horario_str):
+    ano, mes, dia = map(int, data_str.split("-"))
+    h, m, s = map(int, horario_str.split(":"))
+
+    data = date(ano, mes, dia)
+    segundos_do_dia = h * 3600 + m * 60 + s
+    return data.toordinal() * 86400 + segundos_do_dia
 
 def criar_chave(data, horario, linha):
     #(data, horario, linha) -> valor que vai dentro da árvore.
