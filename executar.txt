@@ -1,0 +1,3 @@
+-
+python Fase1/main.py {arquivo}
+python Fase3/main.py {arquivo}

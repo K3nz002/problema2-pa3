@@ -1,5 +1,3 @@
-import busca_binaria
-
 def altura(no):
     if no is None:
         return 0

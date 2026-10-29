@@ -54,7 +54,7 @@ def executar(arvore, op, saida):
         saida.append("OK" if ok else "NAO")
 
     elif cmd == "ALT":                                      # R7
-        saida.append(str(altura(arvore)))
+        saida.append(str(altura(arvore.raiz)))
 
     elif cmd == "SEMANA":                                   # R8
         lista = espera_semanal(arvore, op[1], op[2], op[3], int(op[4]))
@@ -79,7 +79,7 @@ def rodar(caminho):
 
 def main():
     if len(sys.argv) < 2:
-        sys.stderr.write("Uso: python sistema.py arquivo_de_operacoes.txt\n")
+        sys.stderr.write("Uso: python Fase1/main.py arquivo_de_operacoes.txt\n")
         return
 
     sys.setrecursionlimit(1000000)

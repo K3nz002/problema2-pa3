@@ -1,12 +1,4 @@
-from busca_binaria import Arvore, No 
 from chave import criar_chave
 
-def registrar_chegada (arvore, data, horario, linha):
-    valor = (data, horario, linha)
-        
-    resultado = arvore.inserir(valor)
-        
-    if resultado:
-        return "OK"
-    else: 
-        return "DUPLICADO"
+def registrar_chegada(arvore, data, horario, linha):
+    return arvore.inserir(criar_chave(data, horario, linha))
