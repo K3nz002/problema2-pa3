@@ -1,25 +1,15 @@
-from datetime import datetime, timedelta
-from buscar_chegada import buscar_chegada
+from datetime import date, timedelta
+from chave import para_segundos
+from proximo_da_linha import proximo_da_linha
 
-def espera_semanal(linha, data, horario, k):
-    data_final = datetime.strptime(data, '%Y-%m-%d')
-    horario_esperado = datetime.strptime(horario, '%H:%M:%S').time()
-    # De i = k - 1 até 0 (da semana mais antiga até a data informada)
+def espera_semanal(arvore, linha, data, horario, k):
+    resultado = []
+    data_final = date.fromisoformat(data)
     for i in range(k - 1, -1, -1):
-        data_atual = data_final - timedelta(weeks=i)
-        data_atual_str = data_atual.strftime('%Y-%m-%d')
-        chegadas = buscar_chegada(data_atual_str, horario, linha)
-        horario_chegada = None
-        
-        for chegada in chegadas:
-            if chegada.hora >= horario_esperado:
-                horario_chegada = chegada.horario
-                break
-
-        if horario_chegada is not None:
-            horario_esperado = datetime.strptime(f"{data_atual_str} {horario}", '%Y-%m-%d %H:%M:%S')
-            horario_chegada = datetime.strptime(f"{data_atual_str} {horario_chegada}", '%Y-%m-%d %H:%M:%S')
-            segundos_espera = int((horario_chegada - horario_esperado).total_seconds())
-            print(f"{data_atual_str} {segundos_espera}")
+        dia = (data_final - timedelta(weeks=i)).isoformat()
+        r = proximo_da_linha(arvore, dia, horario, linha)
+        if r is None or r[0] != dia:          # não passou mais naquele dia
+            resultado.append((dia, None))
         else:
-            print(f"{data_atual_str} NAOPASSOU")
+            resultado.append((dia, para_segundos(r[0], r[1]) - para_segundos(dia, horario)))
+    return resultado

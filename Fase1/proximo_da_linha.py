@@ -1,27 +1,23 @@
-from busca_binaria import Arvore, No
+from chave import para_segundos, chave_para_chegada
 
-
-# R4: PROXL data hora linha
+# R4: PROXL data hora linha (Fase 1: percorre a árvore inteira)
 def proximo_da_linha(arvore, data, hora, linha):
     melhor = None
-    instante = (data, hora)
+    instante = para_segundos(data, hora)
 
     def percorrer(no):
         nonlocal melhor
-
         if no is None:
             return
-
-        instante_atual = (no.data, no.hora)
-
-        if no.linha == linha and instante_atual >= instante:
-            if melhor is None or instante_atual < (
-                melhor.data, melhor.hora
-            ):
-                melhor = no
-
+        seg, lin = no.valor
+        if lin == linha and seg >= instante:
+            if melhor is None or seg < melhor[0]:
+                melhor = no.valor
         percorrer(no.esq)
         percorrer(no.dir)
 
     percorrer(arvore.raiz)
-    return melhor
+    if melhor is None:
+        return None
+    data_r, hora_r, _ = chave_para_chegada(melhor)
+    return (data_r, hora_r)

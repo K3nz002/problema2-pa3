@@ -1,10 +1,4 @@
-from busca_binaria import Arvore, No
+from chave import criar_chave
 
 def buscar_chegada(arvore, data, horario, linha):
-    valor = (data, horario, linha)
-    resultado = arvore.buscar(valor)
-
-    if resultado:
-        return "ACHOU"
-    else:
-        return "NAO"
+    return arvore.buscar(criar_chave(data, horario, linha))
