@@ -19,6 +19,13 @@ python Fase1/main.py "Arquivos P2/pequeno.txt" > saida.txt
 Compare-Object (Get-Content saida.txt) (Get-Content "Arquivos P2/pequeno_esperado_fase1.txt")
 ```
 
+## Fase 2 (medições)
+Executa cada arquivo de carga 5 vezes com a árvore da Fase 1 e gera a tabela com a mediana dos tempos e a altura final:
+```
+python Fase2/medir.py
+```
+A tabela é impressa na tela e salva em `Fase2/resultados_Fase1.md`.
+
 ## Uso de IA
 - Testes do código afim de identificar erros
 - Pesquisa sobre a estrutura de árvore binária
