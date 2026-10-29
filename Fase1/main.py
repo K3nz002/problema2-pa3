@@ -83,7 +83,10 @@ def main():
         return
 
     sys.setrecursionlimit(1000000)
-    threading.stack_size(256 * 1024 * 1024)
+    try:    
+        threading.stack_size(64 * 1024 * 1024)
+    except (ValueError, OverflowError):
+        pass
     t = threading.Thread(target=rodar, args=(sys.argv[1],))
     t.start()
     t.join()

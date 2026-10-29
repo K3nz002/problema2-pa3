@@ -1,3 +1,4 @@
+from busca_binaria import Arvore, No 
 from chave import criar_chave
 
 def registrar_chegada (arvore, data, horario, linha):
