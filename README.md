@@ -27,6 +27,7 @@ python Fase2/medir.py
 A tabela é impressa na tela e salva em `Fase2/resultados_Fase1.md`.
 
 ## Uso de IA
-- Testes do código afim de identificar erros
-- Pesquisa sobre a estrutura de árvore binária
-- Correção de integração entre os módulos da Fase 1 (chave única, retornos e R8)
+- Testes do código afim de identificar erros com o Gemini IA
+- Pesquisa sobre a estrutura de árvore binária com Perplexity
+- Correção de integração entre os módulos da F, com auxílio do Gemini IA Fase 1 (chave única, retornos e R8)
+- Pesquisa sobre árvores AVL com Perplexity
