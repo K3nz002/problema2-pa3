@@ -1,6 +1,8 @@
+import os
 import sys
 import threading
 import time
+import tracemalloc
 
 from busca_binaria import Arvore
 from registrar_chegada import registrar_chegada
@@ -67,14 +69,25 @@ def rodar(caminho):
     arvore = Arvore()
     saida = []
 
+    # memória só é medida quando pedida: tracemalloc deixa a execução mais lenta
+    medir_memoria = os.environ.get("MEDIR_MEMORIA") == "1"
+    if medir_memoria:
+        tracemalloc.start()
+
     inicio = time.perf_counter()              # mede as operações
     for op in operacoes:
         executar(arvore, op, saida)
     fim = time.perf_counter()
 
+    if medir_memoria:
+        _, pico = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+
     if saida:
         sys.stdout.write("\n".join(saida) + "\n")
     sys.stderr.write("TEMPO_MS %.3f\n" % ((fim - inicio) * 1000))
+    if medir_memoria:
+        sys.stderr.write("MEMORIA_KB %.1f\n" % (pico / 1024))
 
 
 def main():

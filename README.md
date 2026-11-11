@@ -20,14 +20,17 @@ Compare-Object (Get-Content saida.txt) (Get-Content "Arquivos P2/pequeno_esperad
 ```
 
 ## Fase 2 (medições)
-Executa cada arquivo de carga 5 vezes com a árvore da Fase 1 e gera a tabela com a mediana dos tempos e a altura final:
+Executa cada arquivo de carga 5 vezes com a árvore da Fase 1 e gera a tabela com a mediana dos tempos, a altura final e o pico de memória:
 ```
 python Fase2/medir.py
 ```
 A tabela é impressa na tela e salva em `Fase2/resultados_Fase1.md`.
+
+O pico de memória é medido com `tracemalloc` (biblioteca padrão) em uma execução extra de cada arquivo, separada das 5 cronometradas, porque o `tracemalloc` deixa o programa mais lento. Para isso o `medir.py` define a variável de ambiente `MEDIR_MEMORIA=1`, e o `main.py` passa a escrever `MEMORIA_KB valor` na saída de erro. Sem essa variável, o `main.py` funciona normalmente, sem medir memória.
 
 ## Uso de IA
 - Testes do código afim de identificar erros com o Gemini IA
 - Pesquisa sobre a estrutura de árvore binária com Perplexity
 - Correção de integração entre os módulos da F, com auxílio do Gemini IA Fase 1 (chave única, retornos e R8)
 - Pesquisa sobre árvores AVL com Perplexity
+- Resumo da fonte https://docs.python.org/3/library/tracemalloc.html sintetizando o método de funcionamento com Claude AI
