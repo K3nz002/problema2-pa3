@@ -1,8 +1,14 @@
 from arvore_avl import *
 from chave import para_segundos, chave_para_chegada
+from buscar_index_linha import obter_arvore_da_linha
 
 # R4: PROXL data hora linha (Fase 1: percorre a árvore inteira)
-def proximo_da_linha(arvore, data, hora, linha):
+def proximo_da_linha(linhas_arvores, data, hora, linha):
+    
+    arvore = obter_arvore_da_linha(linhas_arvores, linha, nao_existe=False)
+    if arvore is None or arvore.raiz is None:
+        return None
+    
     melhor = None
     instante = para_segundos(data, hora)
 

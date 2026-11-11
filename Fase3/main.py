@@ -4,6 +4,7 @@ import time
 from arvore_avl import *
 from registrar_chegada import registrar_chegada
 from buscar_chegada import buscar_chegada
+from buscar_index_linha import *
 from proximo import proximo
 from proximo_da_linha import proximo_da_linha
 from entre import entre
@@ -23,11 +24,11 @@ def ler_operacoes(caminho):
     return operacoes
 
 
-def executar(arvore, op, saida):
+def executar(arvore, linhas_arvores, op, saida):
     cmd = op[0]
 
     if cmd == "REG":                                        # R1
-        ok = registrar_chegada(arvore, op[1], op[2], op[3])
+        ok = registrar_chegada(arvore, linhas_arvores, op[1], op[2], op[3])
         saida.append("OK" if ok else "DUPLICADO")
 
     elif cmd == "BUSCA":                                    # R2
@@ -39,7 +40,7 @@ def executar(arvore, op, saida):
         saida.append("NENHUM" if r is None else "%s %s %s" % r)
 
     elif cmd == "PROXL":                                    # R4
-        r = proximo_da_linha(arvore, op[1], op[2], op[3])
+        r = proximo_da_linha(linhas_arvores, op[1], op[2], op[3])
         saida.append("NENHUM" if r is None else "%s %s" % r)
 
     elif cmd == "ENTRE":                                    # R5
@@ -49,14 +50,14 @@ def executar(arvore, op, saida):
             saida.append("%s %s %s" % item)
 
     elif cmd == "REM":                                      # R6
-        ok = remover_chegada(arvore, op[1], op[2], op[3])
+        ok = remover_chegada(arvore, linhas_arvores, op[1], op[2], op[3])
         saida.append("OK" if ok else "NAO")
 
     elif cmd == "ALT":                                      # R7
         saida.append(str(altura(arvore.raiz)))
 
     elif cmd == "SEMANA":                                   # R8
-        lista = espera_semanal(arvore, op[1], op[2], op[3], int(op[4]))
+        lista = espera_semanal(linhas_arvores, op[1], op[2], op[3], int(op[4]))
         for data_i, espera in lista:
             saida.append("%s %s" % (data_i, "NAOPASSOU" if espera is None else espera))
 
@@ -64,11 +65,12 @@ def executar(arvore, op, saida):
 def rodar(caminho):
     operacoes = ler_operacoes(caminho)        # lê tudo antes de executar
     arvore = Arvore()
+    linhas_arvores = []
     saida = []
 
     inicio = time.perf_counter()              # mede as operações
     for op in operacoes:
-        executar(arvore, op, saida)
+        executar(arvore, linhas_arvores, op, saida)
     fim = time.perf_counter()
 
     if saida:
