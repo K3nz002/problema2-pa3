@@ -62,6 +62,11 @@ def executar(arvore, linhas_arvores, op, saida):
         lista = espera_semanal(linhas_arvores, op[1], op[2], op[3], int(op[4]))
         for data_i, espera in lista:
             saida.append("%s %s" % (data_i, "NAOPASSOU" if espera is None else espera))
+    elif cmd == "LINHAS":
+        lista = entre(arvore, op[1], op[2], op[3], op[4])
+        saida.append(str(len(lista)))
+        for item in lista:
+            saida.append("%s %s %s" % item)
 
 
 def rodar(caminho):
