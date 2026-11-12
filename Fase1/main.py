@@ -17,7 +17,7 @@ from espera_semanal import espera_semanal
 
 def ler_operacoes(caminho):
     operacoes = []
-    with open(caminho, "r", encoding="utf-8") as arq:
+    with open(caminho, "r", encoding="utf-8-sig") as arq:
         for linha in arq:
             texto = linha.strip()
             if texto == "" or texto.startswith("#"):

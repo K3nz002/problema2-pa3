@@ -1,14 +1,20 @@
-Programa: Fase3/main.py | repetições por arquivo: 5 | Python 3.12.10
+Programa: Fase3/main.py | repetições por arquivo: 5 | Python 3.13.15
 
-| Versão | N | Mediana (ms) | Altura final | Tempos (ms) |
-|---|---|---|---|---|
-| quase_ordem | 1000 | 13.733 | 11 | 13.311, 13.159, 13.733, 14.387, 14.526 |
-| quase_ordem | 5000 | 214.878 | 13 | 215.612, 214.878, 214.202, 239.487, 214.556 |
-| quase_ordem | 20000 | 3359.826 | 15 | 3332.256, 3598.639, 3614.321, 3359.826, 3079.273 |
-| embaralhada | 1000 | 14.409 | 12 | 15.691, 13.803, 15.165, 14.409, 14.109 |
-| embaralhada | 5000 | 233.588 | 15 | 233.588, 309.224, 232.565, 284.282, 232.004 |
-| embaralhada | 20000 | 4677.492 | 17 | 4351.726, 4677.492, 4741.985, 4759.417, 4673.611 |
+| Versão | N | Mediana (ms) | Altura final | Memória pico (KB) | Tempos (ms) |
+|---|---|---|---|---|---|
+| quase_ordem | 1000 | 12.914 | 11 | 314.6 | 12.983, 12.568, 12.541, 12.914, 15.911 |
+| quase_ordem | 5000 | 82.777 | 13 | 1562.0 | 81.395, 82.777, 80.548, 104.678, 98.137 |
+| quase_ordem | 20000 | 417.381 | 15 | 6229.8 | 416.907, 417.381, 452.629, 445.693, 416.250 |
+| embaralhada | 1000 | 12.821 | 12 | 314.3 | 14.000, 12.821, 12.521, 12.121, 13.717 |
+| embaralhada | 5000 | 81.375 | 15 | 1561.4 | 80.808, 82.433, 87.343, 79.573, 81.375 |
+| embaralhada | 20000 | 439.800 | 17 | 6202.0 | 439.800, 440.382, 437.920, 434.873, 444.877 |
 
 Razão T(N=20000) / T(N=1000):
-- quase_ordem: 244.7
-- embaralhada: 324.6
+- quase_ordem: 32.3
+- embaralhada: 34.3
+
+Razão M(N=20000) / M(N=1000):
+- quase_ordem: 19.8
+- embaralhada: 19.7
+
+Memória pico: maior volume alocado pelo Python durante as operações (tracemalloc), medido em uma execução separada da cronometrada.

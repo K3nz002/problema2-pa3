@@ -28,6 +28,24 @@ A tabela é impressa na tela e salva em `Fase2/resultados_Fase1.md`.
 
 O pico de memória é medido com `tracemalloc` (biblioteca padrão) em uma execução extra de cada arquivo, separada das 5 cronometradas, porque o `tracemalloc` deixa o programa mais lento. Para isso o `medir.py` define a variável de ambiente `MEDIR_MEMORIA=1`, e o `main.py` passa a escrever `MEMORIA_KB valor` na saída de erro. Sem essa variável, o `main.py` funciona normalmente, sem medir memória.
 
+## Fase 3 (árvore AVL)
+Executar:
+```
+python Fase3/main.py "Arquivos P2/pequeno.txt"
+```
+
+Conferir com a resposta esperada (PowerShell):
+```
+python Fase3/main.py "Arquivos P2/pequeno.txt" > saida.txt
+Compare-Object (Get-Content saida.txt) (Get-Content "Arquivos P2/pequeno_esperado_fase3.txt")
+```
+
+Medições com os mesmos arquivos de carga da Fase 2 (5 execuções por arquivo, mediana dos tempos, altura final e pico de memória):
+```
+python Fase2/medir.py Fase3/main.py
+```
+A tabela é impressa na tela e salva em `Fase2/resultados_Fase3.md`. A comparação lado a lado com a Fase 1 usa `Fase2/resultados_Fase1.md` e `Fase2/resultados_Fase3.md`, gerados na mesma máquina.
+
 ## Uso de IA
 - Testes do código afim de identificar erros com o Gemini IA
 - Pesquisa sobre a estrutura de árvore binária com Perplexity

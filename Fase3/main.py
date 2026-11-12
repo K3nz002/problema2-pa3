@@ -1,6 +1,8 @@
+import os
 import sys
 import threading
 import time
+import tracemalloc
 from arvore_avl import *
 from registrar_chegada import registrar_chegada
 from buscar_chegada import buscar_chegada
@@ -15,7 +17,7 @@ from espera_semanal import espera_semanal
 
 def ler_operacoes(caminho):
     operacoes = []
-    with open(caminho, "r", encoding="utf-8") as arq:
+    with open(caminho, "r", encoding="utf-8-sig") as arq:
         for linha in arq:
             texto = linha.strip()
             if texto == "" or texto.startswith("#"):
@@ -68,19 +70,29 @@ def rodar(caminho):
     linhas_arvores = []
     saida = []
 
+    medir_memoria = os.environ.get("MEDIR_MEMORIA") == "1"
+    if medir_memoria:
+        tracemalloc.start()
+
     inicio = time.perf_counter()              # mede as operações
     for op in operacoes:
         executar(arvore, linhas_arvores, op, saida)
     fim = time.perf_counter()
 
+    if medir_memoria:
+        _, pico = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+
     if saida:
         sys.stdout.write("\n".join(saida) + "\n")
     sys.stderr.write("TEMPO_MS %.3f\n" % ((fim - inicio) * 1000))
+    if medir_memoria:
+        sys.stderr.write("MEMORIA_KB %.1f\n" % (pico / 1024))
 
 
 def main():
     if len(sys.argv) < 2:
-        sys.stderr.write("Uso: python Fase1/main.py arquivo_de_operacoes.txt\n")
+        sys.stderr.write("Uso: python Fase3/main.py arquivo_de_operacoes.txt\n")
         return
 
     sys.setrecursionlimit(1000000)
